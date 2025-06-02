@@ -45,6 +45,7 @@ const expectedProperties = {
         'meta_description',
         'email_subject',
         'frontmatter',
+        'disable_open',
         'reading_time'
     ],
     author: _(schema.users)

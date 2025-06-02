@@ -68,6 +68,7 @@ const expectedProperties = {
         'tiers',
         'newsletter',
         'count',
+        'disable_open',
         'reading_time'
     ],
     user: [

@@ -233,6 +233,20 @@ export default class GhPostSettingsMenu extends Component {
     }
 
     @action
+    toggleDisableOpen(event) {
+        this.post.disableOpen = event.target.checked;
+
+        if (this.post.isNew) {
+            return;
+        }
+
+        this.savePostTask.perform().catch((error) => {
+            this.showError(error);
+            this.post.rollbackAttributes();
+        });
+    }
+
+    @action
     openPostHistory() {
         this.showPostHistory = true;
     }
