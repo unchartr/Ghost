@@ -15,15 +15,17 @@
                             <label for="url">{{capitalize this.post.displayName}} URL</label>
                             {{!-- new posts don't have a preview link --}}
                             {{#unless this.post.isNew}}
-                                {{#if (or this.post.isPublished this.post.isSent)}}
-                                <a class="post-view-link" target="_blank" href="{{this.post.url}}" rel="noopener noreferrer">
-                                    View {{this.post.displayName}} {{svg-jar "arrow-top-right"}}
-                                </a>
-                                {{else if this.post.isScheduled}}
-                                <a class="post-view-link" target="_blank" href="{{this.post.previewUrl}}" rel="noopener noreferrer">
-                                    Preview {{svg-jar "arrow-top-right"}}
-                                </a>
-                                {{/if}}
+                                {{#unless this.post.disableOpen}}
+                                    {{#if (or this.post.isPublished this.post.isSent)}}
+                                    <a class="post-view-link" target="_blank" href="{{this.post.url}}" rel="noopener noreferrer">
+                                        View {{this.post.displayName}} {{svg-jar "arrow-top-right"}}
+                                    </a>
+                                    {{else if this.post.isScheduled}}
+                                    <a class="post-view-link" target="_blank" href="{{this.post.previewUrl}}" rel="noopener noreferrer">
+                                        Preview {{svg-jar "arrow-top-right"}}
+                                    </a>
+                                    {{/if}}
+                                {{/unless}}
                             {{/unless}}
 
                             <div class="gh-input-icon gh-icon-link">
@@ -174,6 +176,25 @@
                                             >
                                             <span class="input-toggle-component"></span>
                                         </span>
+                                    </label>
+                                </div>
+                            </li>
+                            <li class="nav-list-item">
+                                <div class="for-switch xs">
+                                    <label class="switch">
+                                        <span>
+                                            Disable opening
+                                        </span>
+                                        <div class="gh-toggle-featured">
+                                            <input
+                                                type="checkbox"
+                                                checked={{this.post.disableOpen}}
+                                                class="gh-input post-settings-featured gh-input-x"
+                                                {{on "change" this.toggleDisableOpen}}
+                                                data-test-checkbox="disable-open"
+                                            >
+                                            <span class="input-toggle-component"></span>
+                                        </div>
                                     </label>
                                 </div>
                             </li>
