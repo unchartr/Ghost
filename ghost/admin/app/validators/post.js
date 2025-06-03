@@ -9,6 +9,7 @@ export default BaseValidator.create({
         'authors',
         'customExcerpt',
         'canonicalUrl',
+        'externalUrl',
         'codeinjectionHead',
         'codeinjectionFoot',
         'metaTitle',
@@ -56,6 +57,24 @@ export default BaseValidator.create({
             this.invalidate();
         } else if (!validator.isLength(model.canonicalUrl, 0, 2000)) {
             model.errors.add('canonicalUrl', 'Canonical URL is too long, max 2000 chars');
+            this.invalidate();
+        }
+    },
+
+    externalUrl(model) {
+        let validatorOptions = {require_protocol: true};
+        let urlRegex = new RegExp(/^(\/|[a-zA-Z0-9-]+:)/);
+        let url = model.externalUrl;
+
+        if (isBlank(url)) {
+            return;
+        }
+
+        if (url.match(/\s/) || (!validator.isURL(url, validatorOptions) && !url.match(urlRegex))) {
+            model.errors.add('externalUrl', 'Please enter a valid URL');
+            this.invalidate();
+        } else if (!validator.isLength(model.externalUrl, 0, 2000)) {
+            model.errors.add('externalUrl', 'External URL is too long, max 2000 chars');
             this.invalidate();
         }
     },
