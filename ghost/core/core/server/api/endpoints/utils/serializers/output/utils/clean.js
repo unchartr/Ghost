@@ -130,6 +130,8 @@ const post = (attrs, frame) => {
 
     if (attrs.type !== 'page') {
         delete attrs.show_title_and_feature_image;
+    } else {
+        delete attrs.disable_open;
     }
 
     delete attrs.locale;

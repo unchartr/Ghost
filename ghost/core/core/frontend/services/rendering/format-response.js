@@ -79,11 +79,13 @@ function formatResponse(post, context, locals = {}) {
     // - done here rather than `update-local-template-options` middleware because
     //   we need access to the rendered entry's data which isn't available in middleware
     const pageData = {
-        show_title_and_feature_image: true // default behaviour
+        show_title_and_feature_image: true, // default behaviour
+        disable_open: false
     };
 
     // grab data off of the post that will be deleted in prepareContextResource
     const showTitleAndFeatureImage = post.show_title_and_feature_image;
+    const disableOpen = post.disable_open;
 
     prepareContextResource(post);
 
@@ -100,6 +102,9 @@ function formatResponse(post, context, locals = {}) {
         // - data is removed from the post object in prepareContextResource so use of @page is forced
         if (showTitleAndFeatureImage !== undefined) {
             pageData.show_title_and_feature_image = showTitleAndFeatureImage;
+        }
+        if (disableOpen !== undefined) {
+            pageData.disable_open = disableOpen;
         }
     }
 

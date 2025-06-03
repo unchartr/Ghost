@@ -15,6 +15,10 @@ module.exports = function url(options) {
     const absolute = options && options.hash.absolute && options.hash.absolute !== 'false';
     let outputUrl = getMetaDataUrl(this, absolute);
 
+    if (this?.disable_open) {
+        return new SafeString('#');
+    }
+
     try {
         outputUrl = encodeURI(decodeURI(outputUrl)).replace(/%5B/g, '[').replace(/%5D/g, ']');
     } catch (err) {

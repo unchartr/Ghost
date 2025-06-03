@@ -96,7 +96,8 @@ Post = ghostBookshelf.Model.extend({
             tiers,
             visibility: visibility,
             email_recipient_filter: 'all',
-            show_title_and_feature_image: true
+            show_title_and_feature_image: true,
+            disable_open: false
         };
     },
 

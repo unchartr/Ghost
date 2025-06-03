@@ -31,7 +31,9 @@ export default class PostSerializer extends ApplicationSerializer.extend(Embedde
         // Deprecated property (replaced with data.authors)
         delete json.author;
         // Page-only properties
-        if (snapshot.modelName !== 'page') {
+        if (snapshot.modelName === 'page') {
+            delete json.disable_open;
+        } else {
             delete json.show_title_and_feature_image;
         }
 
