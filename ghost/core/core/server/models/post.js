@@ -164,7 +164,8 @@ Post = ghostBookshelf.Model.extend({
             'feature_image',
             'og_image',
             'twitter_image',
-            'canonical_url'
+            'canonical_url',
+            'external_url'
         ].forEach((attr) => {
             if (attrs[attr]) {
                 attrs[attr] = urlUtils.transformReadyToAbsolute(attrs[attr]);
@@ -200,6 +201,12 @@ Post = ghostBookshelf.Model.extend({
             og_image: 'toTransformReady',
             twitter_image: 'toTransformReady',
             canonical_url: {
+                method: 'toTransformReady',
+                options: {
+                    ignoreProtocol: false
+                }
+            },
+            external_url: {
                 method: 'toTransformReady',
                 options: {
                     ignoreProtocol: false
@@ -1104,7 +1111,7 @@ Post = ghostBookshelf.Model.extend({
      *            This is protected by the fn `permittedOptions`.
      */
     defaultColumnsToFetch: function defaultColumnsToFetch() {
-        return ['id', 'published_at', 'slug'];
+        return ['id', 'published_at', 'slug', 'external_url'];
     },
     /**
      * If the `formats` option is not used, we return `html` be default.
