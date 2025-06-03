@@ -87,6 +87,7 @@ export default Model.extend(Comparable, ValidationEngine, {
     customExcerpt: attr('string'),
     featured: attr('boolean', {defaultValue: false}),
     canonicalUrl: attr('string'),
+    externalUrl: attr('string'),
     codeinjectionFoot: attr('string', {defaultValue: ''}),
     codeinjectionHead: attr('string', {defaultValue: ''}),
     customTemplate: attr('string'),
@@ -148,6 +149,7 @@ export default Model.extend(Comparable, ValidationEngine, {
     publishedAtBlogTime: '',
 
     canonicalUrlScratch: boundOneWay('canonicalUrl'),
+    externalUrlScratch: boundOneWay('externalUrl'),
     customExcerptScratch: boundOneWay('customExcerpt'),
     codeinjectionFootScratch: boundOneWay('codeinjectionFoot'),
     codeinjectionHeadScratch: boundOneWay('codeinjectionHead'),
