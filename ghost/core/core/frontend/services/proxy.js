@@ -29,6 +29,7 @@ module.exports = {
 
             // some properties are extracted to local template data to force one way of using it
             delete resource.show_title_and_feature_image;
+            delete resource.disable_open;
         });
     },
 

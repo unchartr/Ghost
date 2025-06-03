@@ -35,6 +35,7 @@ module.exports = [
                 'locale',
                 'newsletter_id',
                 'show_title_and_feature_image',
+                'disable_open',
                 'email_recipient_filter',
                 'comment_id',
                 'tiers'
@@ -88,6 +89,7 @@ module.exports = [
                 'primary_author',
                 'newsletter_id',
                 'show_title_and_feature_image',
+                'disable_open',
                 'email_recipient_filter',
                 'comment_id',
                 'tiers'

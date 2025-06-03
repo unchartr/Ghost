@@ -33,6 +33,7 @@ export default class PostSerializer extends ApplicationSerializer.extend(Embedde
         // Page-only properties
         if (snapshot.modelName !== 'page') {
             delete json.show_title_and_feature_image;
+            delete json.disable_open;
         }
 
         if (json.visibility === null) {
