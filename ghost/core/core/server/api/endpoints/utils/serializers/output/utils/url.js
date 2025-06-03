@@ -3,7 +3,7 @@ const urlUtils = require('../../../../../../../shared/url-utils');
 const localUtils = require('../../../index');
 
 const forPost = (id, attrs, frame) => {
-    attrs.url = urlService.getUrlByResourceId(id, {absolute: true});
+    attrs.url = attrs.external_url || urlService.getUrlByResourceId(id, {absolute: true});
 
     /**
      * CASE: admin api should serve preview urls
