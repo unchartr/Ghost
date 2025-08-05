@@ -44,6 +44,19 @@
                             {{/if}}
                         </div>
 
+                        <GhFormGroup @errors={{this.post.errors}} @hasValidated={{this.post.hasValidated}} @property="externalUrl">
+                            <label for="externalUrl">External URL</label>
+                            <GhTextInput
+                                @class="post-setting-externalUrl gh-input-x"
+                                @name="post-setting-externalUrl"
+                                @value={{readonly this.externalUrlScratch}}
+                                @input={{action (mut this.externalUrlScratch) value="target.value"}}
+                                @focus-out={{action "setExternalUrl" this.externalUrlScratch}}
+                                @stopEnterKeyDownPropagation={{true}}
+                                data-test-field="externalUrl" />
+                            <GhErrorMessage @errors={{this.post.errors}} @property="externalUrl" />
+                        </GhFormGroup>
+
                         <div class="form-group">
                             {{#if (or this.post.isDraft this.post.isPublished this.post.pastScheduledTime this.post.isSent)}}
                                 <label>Publish date</label>

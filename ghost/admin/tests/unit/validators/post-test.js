@@ -62,4 +62,54 @@ describe('Unit: Validator: post', function () {
             expect(error.message).to.equal('Canonical URL is too long, max 2000 chars');
         });
     });
+
+    describe('externalUrl', function () {
+        it('can be blank', async function () {
+            let post = Post.create({externalUrl: ''});
+            let passed = await post.validate({property: 'externalUrl'}).then(() => true);
+
+            expect(passed, 'passed').to.be.true;
+            expect(post.hasValidated).to.include('externalUrl');
+        });
+
+        it('can be an absolute URL', async function () {
+            let post = Post.create({externalUrl: 'http://example.com'});
+            let passed = await post.validate({property: 'externalUrl'}).then(() => true);
+
+            expect(passed, 'passed').to.be.true;
+            expect(post.hasValidated).to.include('externalUrl');
+        });
+
+        it('can be a relative URL', async function () {
+            let post = Post.create({externalUrl: '/my-other-post'});
+            let passed = await post.validate({property: 'externalUrl'}).then(() => true);
+
+            expect(passed, 'passed').to.be.true;
+            expect(post.hasValidated).to.include('externalUrl');
+        });
+
+        it('cannot be a random string', async function () {
+            let post = Post.create({externalUrl: 'asdfghjk'});
+            let passed = await post.validate({property: 'externalUrl'}).then(() => true).catch(() => false);
+
+            expect(passed, 'passed').to.be.false;
+            expect(post.hasValidated).to.include('externalUrl');
+
+            let error = post.errors.errorsFor('externalUrl').get(0);
+            expect(error.attribute).to.equal('externalUrl');
+            expect(error.message).to.equal('Please enter a valid URL');
+        });
+
+        it('cannot be too long', async function () {
+            let post = Post.create({externalUrl: `http://example.com/${(new Array(1983).join('x'))}`});
+            let passed = await post.validate({property: 'externalUrl'}).then(() => true).catch(() => false);
+
+            expect(passed, 'passed').to.be.false;
+            expect(post.hasValidated).to.include('externalUrl');
+
+            let error = post.errors.errorsFor('externalUrl').get(0);
+            expect(error.attribute).to.equal('externalUrl');
+            expect(error.message).to.equal('External URL is too long, max 2000 chars');
+        });
+    });
 });
