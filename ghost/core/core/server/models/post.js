@@ -163,7 +163,8 @@ Post = ghostBookshelf.Model.extend({
             'feature_image',
             'og_image',
             'twitter_image',
-            'canonical_url'
+            'canonical_url',
+            'external_url'
         ].forEach((attr) => {
             if (attrs[attr]) {
                 attrs[attr] = urlUtils.transformReadyToAbsolute(attrs[attr]);
@@ -199,6 +200,12 @@ Post = ghostBookshelf.Model.extend({
             og_image: 'toTransformReady',
             twitter_image: 'toTransformReady',
             canonical_url: {
+                method: 'toTransformReady',
+                options: {
+                    ignoreProtocol: false
+                }
+            },
+            external_url: {
                 method: 'toTransformReady',
                 options: {
                     ignoreProtocol: false

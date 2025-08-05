@@ -33,6 +33,9 @@ export default class GhPostSettingsMenu extends Component {
     @alias('post.canonicalUrlScratch')
         canonicalUrlScratch;
 
+    @alias('post.externalUrlScratch')
+        externalUrlScratch;
+
     @alias('post.customExcerptScratch')
         customExcerptScratch;
 
@@ -410,6 +413,26 @@ export default class GhPostSettingsMenu extends Component {
 
         // Make sure the value is valid and if so, save it into the post
         return post.validate({property: 'canonicalUrl'}).then(() => {
+            if (post.get('isNew')) {
+                return;
+            }
+
+        return this.savePostTask.perform();
+        });
+    }
+
+    @action
+    setExternalUrl(value) {
+        let post = this.post;
+        let currentExternalUrl = post.externalUrl;
+
+        if (currentExternalUrl === value) {
+            return;
+        }
+
+        post.set('externalUrl', value);
+
+        return post.validate({property: 'externalUrl'}).then(() => {
             if (post.get('isNew')) {
                 return;
             }
