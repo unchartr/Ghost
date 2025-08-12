@@ -47,6 +47,7 @@ const expectedProperties = {
         'codeinjection_foot',
         'custom_template',
         'canonical_url',
+        'external_url',
         'url',
         'primary_tag',
         'primary_author',
@@ -110,6 +111,7 @@ const expectedProperties = {
         'codeinjection_head',
         'codeinjection_foot',
         'canonical_url',
+        'external_url',
         'accent_color',
         'created_at',
         'updated_at'
